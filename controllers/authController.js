@@ -23,7 +23,7 @@ export const register = async (req, res) => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, {
       expiresIn: "7d",
     });
 
@@ -60,7 +60,7 @@ export const login = async (req, res) => {
       return res.json({ success: decodeBase64, message: "invalid password" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, {
       expiresIn: "7d",
     });
 
